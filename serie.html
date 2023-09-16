@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+<input type="number" id="input" placeholder="id">
+<button id="buton" onclick="alert(f(document.querySelector('#input').value))">send</button>
+
+</body>
+
+<script type="text/javascript">
+
+function intify(n){
+	let a = 0;
+	for(let i = 0;i < n;i++)
+		a = i;
+	return a + 1;
+}
+
+function denominadorAmount(n){
+	return n*2-1;
+}
+function guessDenominador(id){
+	let suma = 0;
+	let res = 0;
+	for(let i = 1;suma < id;i++){
+		suma += denominadorAmount(i);
+		res = i;
+	}
+	return res;
+}
+function guessNumerador(id){
+	let suma = 0;
+	let res = 0;
+	for(let i = 1;suma < id;i++){
+		suma += denominadorAmount(i);
+		if(denominadorAmount(i)+id-suma <= intify(denominadorAmount(i)/2))
+			res = denominadorAmount(i)+id-suma;
+		else
+			res = 2*intify(denominadorAmount(i)/2)-(denominadorAmount(i)+id-suma);
+	}
+	return res;
+}
+
+function f(x){
+	let msg = "0";
+	for(let i = 0;i < x;i++)
+		msg = guessNumerador(i+1) + "/" + guessDenominador(i+1);
+	return msg;
+}
+
+let serie = [];
+
+for(let i = 0;i < 2000;i++)
+	serie[i] = guessNumerador(i+1) + "/" + guessDenominador(i+1);
+
+</script>
+
+</html>
